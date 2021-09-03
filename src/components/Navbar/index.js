@@ -1,19 +1,34 @@
-
+import React, {useState} from 'react';
 import './style.css'
-
+import{NavLink} from 'react-router-dom'
 const Navbar = (props) => {
+
+    const[search, setSearch] = useState(false);
+
+    const submitSearch = (event) =>{
+        event.preventDefault();
+        alert('Searched');
+    }
+
+    const openSearch = () =>{
+        setSearch(true);
+    }
+    const searchClass = search? 'searchInput active': 'searchInput';
+
     return ( 
         <div className='navbar'>
             <ul className='navbarMenu'>
                 
-            <li><a href='#'>Home</a></li>
-            <li><a href='#'>About Us</a></li>
-            <li><a href='#'>Posts</a></li>
-            <li><a href='#'>Contact Us</a></li>
+            <li><NavLink to='/'>Home</NavLink></li>
+            <li><NavLink to='/about-us'>About Us</NavLink></li>
+            <li><NavLink to='/post'>Posts</NavLink></li>
+            <li><NavLink to='/contact-us'>Contact Us</NavLink></li>
             </ul>
             <div className='search'>
-                <input type='text' placeholder='Search' />
-                <button>Search</button>
+                <form onSubmit={submitSearch} >
+                    <input type='text' className={searchClass} placeholder='Search' />
+                    <input type='button' value='Search' onClick={openSearch} className='searchIcon' />
+                </form>
             </div>
         </div> 
     );
